@@ -1,5 +1,5 @@
 (ns scramblies.nrepl
-  (:require [clojure.tools.nrepl.server :as nrepl]
+  (:require [nrepl.server :as nrepl]
             [clojure.tools.logging :as log]))
 
 (defn start

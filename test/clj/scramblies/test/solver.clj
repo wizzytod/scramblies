@@ -1,33 +1,33 @@
 (ns scramblies.test.solver
   (:require [clojure.test :refer [deftest testing is]]
-            [scramblies.solver :refer [scrumble?]]))
+            [scramblies.solver :refer [scramble?]]))
 
 
 (deftest test-solver
 
   (testing "match"
-    (is (true? (scrumble? "abc" "bca"))))
+    (is (true? (scramble? "abc" "bca"))))
 
   (testing "not match"
-    (is (false? (scrumble? "abcd" "bcae"))))
+    (is (false? (scramble? "abcd" "bcae"))))
 
   (testing "ex1"
-    (is (true? (scrumble? "rekqodlw" "world"))))
+    (is (true? (scramble? "rekqodlw" "world"))))
 
   (testing "ex2"
-    (is (true? (scrumble? "cedewaraaossoqqyt" "codewars"))))
+    (is (true? (scramble? "cedewaraaossoqqyt" "codewars"))))
 
   (testing "ex3"
-    (is (false? (scrumble? "katas" "steak"))))
+    (is (false? (scramble? "katas" "steak"))))
 
   (testing "source is shorter"
-    (is (false? (scrumble? "kata" "steak"))))
+    (is (false? (scramble? "kata" "steak"))))
 
   (testing "nil is nil"
-    (is (true? (scrumble? nil nil))))
+    (is (true? (scramble? nil nil))))
 
   (testing "empty is nil"
-    (is (true? (scrumble? "" nil))))
+    (is (true? (scramble? "" nil))))
 
   (testing "empty is nil"
-    (is (true? (scrumble? nil "")))))
+    (is (true? (scramble? nil "")))))
