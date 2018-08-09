@@ -2,9 +2,8 @@
   (:require [scramblies.middleware :as middleware]
             [scramblies.layout :refer [error-page]]
             [scramblies.routes.home :refer [home-routes]]
-            [compojure.core :refer [routes wrap-routes]]
-            [ring.util.http-response :as response]
-            [compojure.route :as route]
+            [scramblies.routes.services :refer [service-routes]]
+            [reitit.swagger-ui :as swagger-ui]
             [reitit.ring :as ring]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.middleware.webjars :refer [wrap-webjars]]
@@ -15,24 +14,19 @@
   :start ((or (:init defaults) identity))
   :stop  ((or (:stop defaults) identity)))
 
-(mount/defstate app
-  :start
-  (middleware/wrap-base
-    (routes
-      (-> #'home-routes
-          (wrap-routes middleware/wrap-csrf)
-          (wrap-routes middleware/wrap-formats))
-          (route/not-found
-             (:body
-               (error-page {:status 404
-                            :title "page not found"}))))))
+
 (mount/defstate app
   :start
   (middleware/wrap-base
     (ring/ring-handler
       (ring/router
-        [(home-routes)])
+        [(home-routes)
+         (service-routes)])
       (ring/routes
+        (swagger-ui/create-swagger-ui-handler
+          {:path   "/swagger-ui"
+           :url    "/api/swagger.json"
+           :config {:validator-url nil}})
         (ring/create-resource-handler
           {:path "/"})
         (wrap-content-type

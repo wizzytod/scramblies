@@ -6,7 +6,6 @@
   :dependencies [[clj-time "0.14.4"]
                  [cljs-ajax "0.7.4"]
                  [com.cognitect/transit-java "0.8.332"]
-                 [compojure "1.6.1"]
                  [cprop "0.1.11"]
                  [funcool/struct "1.3.0"]
                  [kee-frame "0.2.4"]
@@ -23,7 +22,7 @@
                  [org.clojure/tools.cli "0.3.7"]
                  [org.clojure/tools.logging "0.4.1"]
                  [org.webjars.bower/tether "1.4.4"]
-                 [org.webjars/bootstrap "4.1.2"]
+                 [org.webjars/bootstrap "4.1.3"]
                  [org.webjars/font-awesome "5.2.0"]
                  [org.webjars/webjars-locator "0.34"]
                  [re-frame "0.10.5"]
@@ -50,7 +49,8 @@
   {:http-server-root "public"
    :nrepl-port 7002
    :css-dirs ["resources/public/css"]
-   :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+   :nrepl-middleware
+   [cider/wrap-cljs-repl cider.piggieback/wrap-cljs-repl]}
   
 
   :profiles
@@ -81,7 +81,7 @@
 
    :project/dev  {:jvm-opts ["-Dconf=dev-config.edn"]
                   :dependencies [[binaryage/devtools "0.9.10"]
-                                 [com.cemerick/piggieback "0.2.2"]
+                                 [cider/piggieback "0.3.8"]
                                  [day8.re-frame/re-frame-10x "0.3.3-react16"]
                                  [doo "0.1.10"]
                                  [expound "0.7.1"]
